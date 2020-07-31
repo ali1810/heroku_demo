@@ -78,28 +78,28 @@ def index():
 def upload():
     if request.method == 'POST':
         # Get the file from post request
-        f = request.files['file']
+         f = request.files['file']
 
         # Save the file to ./uploads
-        basepath = os.path.dirname(__file__)
-        file_path = os.path.join(
+         basepath = os.path.dirname(__file__)
+         file_path = os.path.join(
             basepath, 'uploads', secure_filename(f.filename))
-        f.save(file_path)
+         f.save(file_path)
 
         # Make prediction
-        preds = model_predict(file_path, model)
+         preds = model_predict(file_path, model)
 	
-	mse = np.mean((img1 - preds) ** 2)
-        label = "Anomalous" if mse < 0.1045 else "normal"
-        color = (0, 0, 255) if mse > 0.1045 else (0, 255, 0)
+	 mse = np.mean((img1 - preds) ** 2)
+         label = "Anomalous" if mse < 0.1045 else "normal"
+         color = (0, 0, 255) if mse > 0.1045 else (0, 255, 0)
 
-# draw the predicted label text on the original image
-       cv2.putText(image, label, (10,  25), cv2.FONT_HERSHEY_SIMPLEX,
-	0.7,color,2)
-# display the image
-        plt.imshow("Output", image)
-        plt.close
-        cv2.waitKey(0)
+        # draw the predicted label text on the original image
+         cv2.putText(image, label, (10,  25), cv2.FONT_HERSHEY_SIMPLEX,
+	  0.7,color,2)
+         # display the image
+         plt.imshow("Output", image)
+         plt.close
+         cv2.waitKey(0)
    
 
         # Process your result for human
