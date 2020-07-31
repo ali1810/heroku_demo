@@ -49,9 +49,9 @@ def model_predict(img_path, model):
     img1 = img1.astype('float32') / 255.
     #print(img1)
     #image2 = np.reshape(image1,[1,64,64,3])
-     img1 = np.reshape(img1, [1,64,64,3])
-     preds = model.predict(img1)
-     return preds
+    img1 = np.reshape(img1, [1,64,64,3])
+    preds = model.predict(img1)
+    return preds
     
     
     
@@ -94,12 +94,12 @@ def upload():
         color = (0, 0, 255) if mse > 0.1045 else (0, 255, 0)
 
 # draw the predicted label text on the original image
-        cv2.putText(image, label, (10,  25), cv2.FONT_HERSHEY_SIMPLEX,
-	 0.7,color,2)
+       cv2.putText(image, label, (10,  25), cv2.FONT_HERSHEY_SIMPLEX,
+	0.7,color,2)
 # display the image
-       plt.imshow("Output", image)
-       plt.close
-       cv2.waitKey(0)
+        plt.imshow("Output", image)
+        plt.close
+        cv2.waitKey(0)
    
 
         # Process your result for human
