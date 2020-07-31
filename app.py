@@ -51,18 +51,7 @@ def model_predict(img_path, model):
     #image2 = np.reshape(image1,[1,64,64,3])
      img1 = np.reshape(img1, [1,64,64,3])
      preds = model.predict(img1)
-     mse = np.mean((img1 - preds) ** 2)
-     label = "Anomalous" if mse < 0.1045 else "normal"
-     color = (0, 0, 255) if mse > 0.1045 else (0, 255, 0)
-
-# draw the predicted label text on the original image
-    cv2.putText(image, label, (10,  25), cv2.FONT_HERSHEY_SIMPLEX,
-	0.7,color,2)
-# display the image
-    plt.imshow("Output", image)
-    plt.close
-    cv2.waitKey(0)
-   
+     return preds
     
     
     
@@ -99,6 +88,19 @@ def upload():
 
         # Make prediction
         preds = model_predict(file_path, model)
+	
+	mse = np.mean((img1 - preds) ** 2)
+        label = "Anomalous" if mse < 0.1045 else "normal"
+        color = (0, 0, 255) if mse > 0.1045 else (0, 255, 0)
+
+# draw the predicted label text on the original image
+        cv2.putText(image, label, (10,  25), cv2.FONT_HERSHEY_SIMPLEX,
+	 0.7,color,2)
+# display the image
+       plt.imshow("Output", image)
+       plt.close
+       cv2.waitKey(0)
+   
 
         # Process your result for human
         # pred_class = preds.argmax(axis=-1)            # Simple argmax
